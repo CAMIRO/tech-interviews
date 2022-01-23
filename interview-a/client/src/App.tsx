@@ -7,18 +7,19 @@ import {
 } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
-import SurveyDropdown from "./components/SurveyDropdown";
-import SurveyView from "./views/SurveyView"
+
 import { Container, Button } from "react-bootstrap";
+// Views
+import SurveyView from "./views/SurveyView"
+import Sumary from "./views/Sumary"
 
 function App() {
   return (
     <Router>
       <Container className="main pad-t">
-        <SurveyDropdown />
         <Switch>
-          <Route path="/survey/:id" render={props => <SurveyView surveyId={Number(props.match.params.id)} /> }>
-          </Route>
+          <Route path="/survey/:id" render={props => <SurveyView surveyId={Number(props.match.params.id)} /> }/>
+          <Route path="/sumary/" render={props => <Sumary /> }/>
         </Switch>
       </Container>
     </Router>

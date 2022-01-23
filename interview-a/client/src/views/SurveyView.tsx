@@ -4,6 +4,8 @@ import Survey, { ISurvey } from "../entities/Survey";
 import SurveyResponse, { ISurveyResponse } from "../entities/SurveyResponse";
 import {Container, Button} from 'react-bootstrap';
 
+import SurveyDropdown from "src/components/SurveyDropdown";
+
 interface SurveyProps {
     surveyId: number;
 }
@@ -14,6 +16,9 @@ const SurveyView = (props: SurveyProps) => {
 
     const onSurveySubmit = () => {
         const saveSurvey = async (): Promise<void> => {
+            const surveyId = surveyResponse?.id
+            const surveyAnswer = surveyResponse?.content?.questions[0]?.answer
+            
             const response = await fetch(
                 `http://localhost:2047/api/responses/`,
                 {
@@ -23,14 +28,25 @@ const SurveyView = (props: SurveyProps) => {
                 }
             );
 
-            if (!response.ok) {
+            const counter = await fetch(
+                `http://localhost:2047/api/counters/`,
+                {
+                    method: 'PATCH',
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify({ id: surveyId, content: [{ response: surveyAnswer }]})
+                }
+            );
+              
+
+            if (!response.ok || !counter.ok ) {
                 console.error(`API failure: ${response.status}`, await response.json());
             }
         };
 
+  
         // TODO: Saving state
         console.log("Saving...");
-        saveSurvey();
+        saveSurvey();          
         console.log("done.");
     }
     useEffect(() => {
@@ -83,6 +99,7 @@ const SurveyView = (props: SurveyProps) => {
 
     return (
         <Container className="pad-t">
+            <SurveyDropdown />
             <h1>Survey {props.surveyId}</h1>
             { qAndA }
             <Button

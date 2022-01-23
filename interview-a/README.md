@@ -24,7 +24,7 @@ This is a client-server project in TypeScript. The frontend is React talking to 
     - **Do not submit your pull request**, just share it with your interviewer (via screenshot, screen share, or notes)
 
 - Write code for a new feature. (~ 30 minutes)
-    - Build a quick and dirty view that shows to total count of each response to surveys
+    - Build a quick and dirty view that shows the total count of each response to surveys
         - The views should show each unique response to each question with the count of times it was selected
         - For this exercise you can count all responses (don't worry about filtering for repsonses to specific surveys)
         - You may want to create more data to demo this (in `api/src/daos/MockDb/MockDb.json`)

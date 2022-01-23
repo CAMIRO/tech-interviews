@@ -1,10 +1,12 @@
 import jsonfile from 'jsonfile';
 import { ISurvey } from '@entities/Survey';
 import { ISurveyResponse } from '@entities/SurveyResponse'
+import { ISurveyCounter } from  '@entities/SurveyCounter'
 
 interface IDatabase {
     surveys: ISurvey[];
     responses: ISurveyResponse[];
+    counters: ISurveyCounter[];
 }
 
 
